@@ -7,7 +7,7 @@ const path = require("path");
 const app = express();
 app.use(express.json());
 app.use(cors());
-app.use(express.static("./public"));
+app.use(express.static(path.join(__dirname, "../public")));
 
 /* create new note and save in db
   req.body = {title, description} */
@@ -55,6 +55,10 @@ app.patch("/api/notes/:id", async (req, res) => {
   res.status(200).json({
     message: "Note updated Sucessfully",
   });
+});
+
+app.get("/", (req, res) => {
+  res.send("Notes API is running");
 });
 
 app.use("*name", (req, res) => {
